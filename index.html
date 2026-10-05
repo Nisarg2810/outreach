@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Outreach list</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1c1c1a;--mut:#77756e;--line:#e6e3da;--acc:#0a66c2;--done:#2e7d32}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mut:#9a988f;--line:#2f2e2a;--acc:#4f9bea;--done:#6cc070}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 16px}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:18px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+#count{font-size:14px;color:var(--mut);font-weight:500}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:10px}.bar i{display:block;height:100%;background:var(--done);width:0;transition:width .2s}
+.ctl{display:flex;gap:8px;flex-wrap:wrap}
+input[type=search]{flex:1;min-width:140px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+button{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+label.t{display:flex;align-items:center;gap:6px;color:var(--mut);font-size:14px}
+ol{list-style:none;margin:0;padding:12px 16px 60px}
+li{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:6px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+li.cur{outline:2px solid var(--acc)}
+li .n{width:28px;color:var(--mut);font-variant-numeric:tabular-nums;font-size:13px;text-align:right}
+li input{width:20px;height:20px;accent-color:var(--done);flex:none}
+li .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+li a{color:var(--acc);text-decoration:none;font-weight:600;white-space:nowrap;padding:6px 10px;border-radius:6px}
+li a:hover{background:color-mix(in srgb,var(--acc) 12%,transparent)}
+li.done .nm{color:var(--mut);text-decoration:line-through}
+li.done{opacity:.65}
+.hide-done li.done{display:none}
+.cp{padding:6px 8px;font-size:13px}
+</style></head><body>
+<div class="top"><div class="wrap">
+<h1>Outreach list <span id="count"></span></h1>
+<div class="bar"><i id="prog"></i></div>
+<div class="ctl">
+<button class="pri" id="next">Open next ↗</button>
+<input type="search" id="q" placeholder="Search name…">
+<label class="t"><input type="checkbox" id="hd"> Hide done</label>
+<button id="reset" title="Clear all ticks">Reset</button>
+</div></div></div>
+<div class="wrap"><ol id="list"></ol></div>
+<script>
+const P=[{"n": "Candy Lee", "u": "https://www.linkedin.com/in/leecandy"}, {"n": "Chuck Tatham", "u": "https://www.linkedin.com/in/chucktatham"}, {"n": "Danielle Wedge", "u": "https://www.linkedin.com/in/danielle-wedge-75385512"}, {"n": "Ryan Donik", "u": "https://www.linkedin.com/in/ryandonik"}, {"n": "Kate Torrance", "u": "https://www.linkedin.com/in/kate-torrance"}, {"n": "Elizabeth Pizzinato", "u": "https://www.linkedin.com/in/elizabethpizzinato"}, {"n": "Christina Northcott", "u": "https://www.linkedin.com/in/christina-northcott"}, {"n": "Lauren Round", "u": "https://www.linkedin.com/in/lauren-round-391b5256"}, {"n": "Brendan Luck", "u": "https://www.linkedin.com/in/brendan-luck-209246213"}, {"n": "Jannine Krish", "u": "https://www.linkedin.com/in/janninekrish"}, {"n": "Christine Cho Cfre", "u": "https://www.linkedin.com/in/christinelycho"}, {"n": "Rav Singh", "u": "https://www.linkedin.com/in/rav-singh"}, {"n": "Patricia Bosch Cm", "u": "https://www.linkedin.com/in/patricia-bosch-cm-8a39a111"}, {"n": "Heather Bischop Aggarwal", "u": "https://www.linkedin.com/in/heather-bischop-aggarwal"}, {"n": "James Melvin", "u": "https://www.linkedin.com/in/james-melvin-5b2a0b1b3"}, {"n": "Colin Bettam", "u": "https://www.linkedin.com/in/colin-bettam-9778407"}, {"n": "Karla Pena", "u": "https://www.linkedin.com/in/penakarla"}, {"n": "Ryan Funt", "u": "https://www.linkedin.com/in/ryanfunt"}, {"n": "Sean Kelly", "u": "https://www.linkedin.com/in/sean-nr-kelly"}, {"n": "Noah Parker", "u": "https://www.linkedin.com/in/noah-parker"}, {"n": "James Bisson", "u": "https://www.linkedin.com/in/james-bisson-90ba0b58"}, {"n": "Nadia Kumentas", "u": "https://www.linkedin.com/in/nadia-kumentas-84361963"}, {"n": "Susan Fry", "u": "https://www.linkedin.com/in/susanfry1"}, {"n": "Adrian Bachmann", "u": "https://www.linkedin.com/in/adrianbachmann"}, {"n": "Travis Wingate", "u": "https://www.linkedin.com/in/travis-wingate-to"}, {"n": "Sean Watkins", "u": "https://www.linkedin.com/in/sean-watkins-3345a5b6"}, {"n": "Matt Hawes", "u": "https://www.linkedin.com/in/mattjhawes"}, {"n": "Ed Worsfold", "u": "https://www.linkedin.com/in/edworsfold"}, {"n": "Alexandra Smith", "u": "https://www.linkedin.com/in/alexandraleighsmith"}, {"n": "James Black", "u": "https://www.linkedin.com/in/jamesfablack"}, {"n": "June Ip", "u": "https://www.linkedin.com/in/juneip"}, {"n": "Lindsay Ho", "u": "https://www.linkedin.com/in/lindsay-ho"}, {"n": "Tina Kaichis", "u": "https://www.linkedin.com/in/tinakaichis"}, {"n": "Ahmed Haq", "u": "https://www.linkedin.com/in/ahmedmhaq"}, {"n": "Anthony Mila", "u": "https://www.linkedin.com/in/anthonymila"}, {"n": "Denise Dias", "u": "https://www.linkedin.com/in/denise-dias-2a733a98"}, {"n": "Alice De Vries", "u": "https://www.linkedin.com/in/alicewan"}, {"n": "Tosin Olaniyi-Oyekan", "u": "https://www.linkedin.com/in/tosin-olaniyi-"}, {"n": "Corey Sherwood", "u": "https://www.linkedin.com/in/coreysherwood"}, {"n": "Piash Alam", "u": "https://www.linkedin.com/in/piashalam"}, {"n": "Annisha Lashand She Her", "u": "https://www.linkedin.com/in/annishalashand"}, {"n": "Jess Willis", "u": "https://www.linkedin.com/in/jess-willis-1236683"}, {"n": "Katy Baker", "u": "https://www.linkedin.com/in/katy-baker-a4a8a6b"}, {"n": "Meltem Kuran Berkowitz", "u": "https://www.linkedin.com/in/meltem-kuran-berkowitz-4721114b"}, {"n": "Daniel Gang", "u": "https://www.linkedin.com/in/daniel-gang-b0a82262"}, {"n": "Kristine Moshonas", "u": "https://www.linkedin.com/in/kristine-moshonas-90a2b848"}, {"n": "Rob Lisi", "u": "https://www.linkedin.com/in/rob-lisi-mba-14a0a11"}, {"n": "Talia Schwebel", "u": "https://www.linkedin.com/in/talia-schwebel-7a847859"}, {"n": "Ashish Khera", "u": "https://www.linkedin.com/in/ashishkhera"}, {"n": "Tristan Retelsdorf", "u": "https://www.linkedin.com/in/tretelsdorf"}, {"n": "Jacqueline Grossman", "u": "https://www.linkedin.com/in/jacquelinegrossman"}, {"n": "Bridget Westerholz", "u": "https://www.linkedin.com/in/bridget-westerholz-7860958"}, {"n": "Jacob Reeleder", "u": "https://www.linkedin.com/in/jacob-reeleder"}, {"n": "Jenna Murphy", "u": "https://www.linkedin.com/in/murphyjenna"}, {"n": "Shez Mehra", "u": "https://www.linkedin.com/in/shezmehra"}, {"n": "Alexandra De Clerck", "u": "https://www.linkedin.com/in/alexandradeclerck"}, {"n": "Sarah Terrelonge", "u": "https://www.linkedin.com/in/sarahterrelonge"}, {"n": "Elana Schachter", "u": "https://www.linkedin.com/in/elanaschachter"}, {"n": "Jing Zhao", "u": "https://www.linkedin.com/in/jingzhao21"}, {"n": "Jo Catalfo", "u": "https://www.linkedin.com/in/jocatalfo"}, {"n": "Igor Bubic", "u": "https://www.linkedin.com/in/igor-bubic"}, {"n": "Harrison Levy", "u": "https://www.linkedin.com/in/harrison-levy-88a2b485"}, {"n": "Stephan Sigaud", "u": "https://www.linkedin.com/in/stephansigaud"}, {"n": "Jeff Young", "u": "https://www.linkedin.com/in/jeffyoungmktg"}, {"n": "Catalina Lee", "u": "https://www.linkedin.com/in/catalinalee"}, {"n": "Erin Mclean", "u": "https://www.linkedin.com/in/ekjmclean"}, {"n": "Anwar C", "u": "https://www.linkedin.com/in/anwar-chaudhry"}, {"n": "Dan Moshkovich", "u": "https://www.linkedin.com/in/danmoshkovich"}, {"n": "Anthony Tavares", "u": "https://www.linkedin.com/in/anthony-tavares"}, {"n": "Truman Tang", "u": "https://www.linkedin.com/in/trumantang"}, {"n": "Laura Peever", "u": "https://www.linkedin.com/in/lauraepeever"}, {"n": "Whitney Bell", "u": "https://www.linkedin.com/in/whitney-a-bell"}, {"n": "Katherine Katie M", "u": "https://www.linkedin.com/in/katiemacserna"}, {"n": "Ellen Hyslop", "u": "https://www.linkedin.com/in/ellen-hyslop-12829445"}, {"n": "Gino Cardenas", "u": "https://www.linkedin.com/in/gino-cardenas-57b58b1"}, {"n": "Evan Coulter", "u": "https://www.linkedin.com/in/evan-coulter"}, {"n": "Amir Chaudhry", "u": "https://www.linkedin.com/in/amir-chaudhry-101aa528"}, {"n": "Nathaniel G", "u": "https://www.linkedin.com/in/nathan-girmaye"}, {"n": "Ariel Rubin", "u": "https://www.linkedin.com/in/arieljrubin"}, {"n": "Lenny Ohm", "u": "https://www.linkedin.com/in/lennyohm"}, {"n": "Dervilla Kelly", "u": "https://www.linkedin.com/in/dervillakelly"}, {"n": "Amy Wong", "u": "https://www.linkedin.com/in/creativeoil"}, {"n": "Dave Theodoropoulos", "u": "https://www.linkedin.com/in/sdtheo"}, {"n": "Michelle Base-Bursey", "u": "https://www.linkedin.com/in/michelle-base-bursey-a0ab5542"}, {"n": "Sarah Kordyban", "u": "https://www.linkedin.com/in/sarahkordyban"}, {"n": "Allison Munro", "u": "https://www.linkedin.com/in/allisondmunro"}, {"n": "Corby Fine", "u": "https://www.linkedin.com/in/corbyfine"}, {"n": "Umesh Krishna K", "u": "https://www.linkedin.com/in/umeshkrishnak"}, {"n": "Greg Overmonds", "u": "https://www.linkedin.com/in/gregovermonds"}, {"n": "Joe Fitzpatrick", "u": "https://www.linkedin.com/in/joefitzpatrick1"}, {"n": "Torben Robertson", "u": "https://www.linkedin.com/in/torbenrobertson"}, {"n": "Shanelle Mullin", "u": "https://www.linkedin.com/in/shanellemullin"}, {"n": "Zena Applebaum", "u": "https://www.linkedin.com/in/zena-applebaum"}, {"n": "Sylvia Rence", "u": "https://www.linkedin.com/in/sylviarence"}, {"n": "Andrew Rapsey", "u": "https://www.linkedin.com/in/andrew-rapsey-593b671"}, {"n": "Ian Lowe", "u": "https://www.linkedin.com/in/idlowe"}, {"n": "James Winters", "u": "https://www.linkedin.com/in/jfwinters"}, {"n": "Adam Frank", "u": "https://www.linkedin.com/in/adambfrank"}, {"n": "Meagan Healey", "u": "https://www.linkedin.com/in/meagan-healey-06629780"}, {"n": "Geoffrey Gualano", "u": "https://www.linkedin.com/in/geoffreygualano"}];
+const K='outreach-done-v1';
+let done={};try{done=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(done))}catch(e){}};
+const L=document.getElementById('list');
+P.forEach((p,i)=>{const li=document.createElement('li');li.dataset.u=p.u;li.dataset.n=p.n.toLowerCase();
+li.innerHTML='<span class="n">'+(i+1)+'</span><input type="checkbox" aria-label="Done"><span class="nm"></span><button class="cp" title="Copy first name">Copy</button><a target="_blank" rel="noopener noreferrer">Open ↗</a>';
+li.querySelector('.nm').textContent=p.n;const a=li.querySelector('a');a.href=p.u;
+const cb=li.querySelector('input');cb.checked=!!done[p.u];li.classList.toggle('done',cb.checked);
+cb.onchange=()=>mark(li,cb.checked);
+a.onclick=()=>{mark(li,true);setCur(li)};
+li.querySelector('.cp').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText(p.n.split(' ')[0]);e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',900)};
+L.appendChild(li)});
+function mark(li,v){li.querySelector('input').checked=v;li.classList.toggle('done',v);if(v)done[li.dataset.u]=1;else delete done[li.dataset.u];save();upd()}
+function setCur(li){document.querySelectorAll('li.cur').forEach(x=>x.classList.remove('cur'));li.classList.add('cur')}
+function upd(){const d=Object.keys(done).filter(u=>P.some(p=>p.u===u)).length;document.getElementById('count').textContent=d+' / '+P.length+' done';document.getElementById('prog').style.width=(d/P.length*100)+'%'}
+document.getElementById('next').onclick=()=>{const li=[...L.children].find(x=>!x.classList.contains('done'));if(!li){alert('All done 🎉');return}
+window.open(li.dataset.u,'_blank','noopener');mark(li,true);setCur(li);li.scrollIntoView({block:'center',behavior:'smooth'})};
+document.getElementById('q').oninput=e=>{const q=e.target.value.toLowerCase().trim();[...L.children].forEach(li=>li.style.display=!q||li.dataset.n.includes(q)?'':'none')};
+document.getElementById('hd').onchange=e=>document.body.classList.toggle('hide-done',e.target.checked);
+document.getElementById('reset').onclick=()=>{if(confirm('Clear all ticks?')){done={};save();[...L.children].forEach(li=>{li.querySelector('input').checked=false;li.classList.remove('done','cur')});upd()}};
+upd();
+</script></body></html>
